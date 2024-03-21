@@ -1,8 +1,12 @@
 import express from 'express';
 import fs from 'fs';
 import yaml from 'js-yaml';
+import cors from 'cors'; // Import the cors module
 
 const app = express();
+
+// Enable CORS middleware
+app.use(cors());
 
 // Serve the index.html file
 app.get('/', (req, res) => {
