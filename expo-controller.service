@@ -1,0 +1,13 @@
+[Unit]
+Description=Expo Controller Web App Service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+WorkingDirectory=%h/expo-controller
+ExecStart=/usr/bin/bun run index.js
+
+[Install]
+WantedBy=default.target
