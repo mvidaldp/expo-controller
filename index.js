@@ -2,11 +2,20 @@ import express from 'express';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import cors from 'cors'; // Import the cors module
+import path from 'path';
 
 const app = express();
 
 // Enable CORS middleware
 app.use(cors());
+
+// Define the directory for static files (like CSS, JavaScript, images)
+app.use(express.static(path.join(__dirname, 'views')));
+
+app.set('views', path.join(__dirname, 'views'));
+
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
 
 // Serve the index.html file
 app.get('/', (req, res) => {
@@ -17,11 +26,8 @@ app.get('/', (req, res) => {
     // Get the boolean value from the config
     const isDefaultTalk = config.isDefaultTalk;
 
-    // Dynamically generate HTML content based on the boolean value
-    const toggleSwitch = ``;
-
-    // Send the HTML content as response
-    res.send(toggleSwitch);
+    // Render the index.html file as an EJS template
+    res.render('index', { isDefaultTalk: isDefaultTalk });
 });
 
 // Route to check the boolean value
