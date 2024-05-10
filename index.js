@@ -60,7 +60,7 @@ app.post('/toggle_default_talk', (req, res) => {
 
 // Route to restart the left Windows computer
 app.post('/restart_left', (req, res) => {
-    exec('/usr/bin/ssh experiment@wd-left "shutdown /r /t 0"', (error, stdout, stderr) => {
+    exec('ssh experiment@wd-left "shutdown /r /t 0"', (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing command: ${error}`);
             res.status(500).send('Error executing command');
@@ -73,7 +73,7 @@ app.post('/restart_left', (req, res) => {
 
 // Route to restart the right Windows computer
 app.post('/restart_right', (req, res) => {
-    exec('/usr/bin/ssh experiment@wd-right "shutdown /r /t 0"', (error, stdout, stderr) => {
+    exec('ssh experiment@wd-right "shutdown /r /t 0"', (error, stdout, stderr) => {
         if (error) {
             console.error(`Error executing command: ${error}`);
             res.status(500).send('Error executing command');
