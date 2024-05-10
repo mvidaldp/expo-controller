@@ -4,21 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Default Talk Toggle</title>
+    <title>Expo Controller</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700&display=swap" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
 
 <body>
-    <h2>DEFAULT TALK</h2>
-    <div class="switch-container">
-        <label class="switch">
-            <!-- Use EJS syntax to conditionally add 'checked' attribute based on isDefaultTalk value -->
-            <input type="checkbox" id="toggleSwitch" <%=isDefaultTalk ? 'checked' : '' %>
-            onchange="toggleSwitchChanged()">
-            <span class="slider"></span>
-        </label>
+    <div class="buttons-container">
+        <div class="switch-container">
+            <h2>DEFAULT TALK</h2>
+            <label class="switch">
+                <!-- Use EJS syntax to conditionally add 'checked' attribute based on isDefaultTalk value -->
+                <input type="checkbox" id="toggleSwitch" <%=isDefaultTalk ? 'checked' : '' %>
+                onchange="toggleSwitchChanged()">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <button type="button" onclick="restartLeft()">Restart WD-LEFT</button>
+        <button type="button onclick=" restartRight()">Restart WD-RIGHT</button>
     </div>
 </body>
 

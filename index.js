@@ -3,6 +3,7 @@ import fs from 'fs';
 import yaml from 'js-yaml';
 import cors from 'cors'; // Import the cors module
 import path from 'path';
+import { exec } from 'child_process'; // Import the exec function to execute shell commands
 
 const app = express();
 
@@ -55,6 +56,32 @@ app.post('/toggle_default_talk', (req, res) => {
     fs.writeFileSync(configPath, yaml.dump(config));
 
     res.sendStatus(200);
+});
+
+// Route to restart the left Windows computer
+app.post('/restart_left', (req, res) => {
+    exec('/usr/bin/ssh experiment@wd-left "shutdown /r /t 0"', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing command: ${error}`);
+            res.status(500).send('Error executing command');
+        } else {
+            console.log('Command executed successfully');
+            res.sendStatus(200);
+        }
+    });
+});
+
+// Route to restart the right Windows computer
+app.post('/restart_right', (req, res) => {
+    exec('/usr/bin/ssh experiment@wd-right "shutdown /r /t 0"', (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error executing command: ${error}`);
+            res.status(500).send('Error executing command');
+        } else {
+            console.log('Command executed successfully');
+            res.sendStatus(200);
+        }
+    });
 });
 
 // Start the server on port 3001
